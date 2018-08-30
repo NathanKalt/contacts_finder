@@ -1,9 +1,4 @@
-# duckduckgo.py - Library for querying the DuckDuckGo API
-#
-# Copyright (c) 2010 Michael Stephens <me@mikej.st>
-# Copyright (c) 2012-2013 Michael Smith <crazedpsyc@gshellz.org>
-#
-# See LICENSE for terms of usage, modification and redistribution.
+# duckduckgo.py - modyfied
 
 import urllib.request, urllib.parse, urllib.error
 import requests
@@ -11,26 +6,13 @@ import json as j
 import sys
 from fake_useragent import UserAgent
 
-
 __version__ = 0.242
 
 
 def query(query, useragent=' '+str(__version__), safesearch=True, html=False, meanings=True, **kwargs):
     """
-    Query DuckDuckGo, returning a Results object.
-
-    Here's a query that's unlikely to change:
-
-    >>> result = query('1 + 1')
-    >>> result.type
-    'nothing'
-    >>> result.answer.text
-    '1 + 1 = 2'
-    >>> result.answer.type
-    'calc'
-
-    Keword arguments:
-    useragent: UserAgent to use while querying. Default: "python-duckduckgo %d" (str)
+    WARN -> ENABLE PROXYBROKER ON PORT 8888
+    useragent: UserAgent to use while querying. Default: "python %d" (str)
     safesearch: True for on, False for off. Default: True (bool)
     html: True to allow HTML in output. Default: False (bool)
     meanings: True to include disambiguations in results (bool)
@@ -53,12 +35,8 @@ def query(query, useragent=' '+str(__version__), safesearch=True, html=False, me
     encparams = urllib.parse.urlencode(params)
     url = 'http://api.duckduckgo.com/?' + encparams
     proxies = {'http':'127.0.0.1:8888', 'https':'127.0.0.1:8888'}
-    # json = requests.get(url, headers={'User-Agent': ua.random}, proxies=proxies).json()
     json = requests.get(url, headers={'User-Agent': ua.random}, proxies=proxies).json()
-
-    
     return Results(json)
-
 
 class Results(object):
 
@@ -69,18 +47,14 @@ class Results(object):
 
         self.json = json
         self.api_version = None # compat
-
         self.heading = json.get('Heading', '')
-
         self.results = [Result(elem) for elem in json.get('Results',[])]
         self.related = [Result(elem) for elem in
                         json.get('RelatedTopics',[])]
-
         self.abstract = Abstract(json)
         self.redirect = Redirect(json)
         self.definition = Definition(json)
         self.answer = Answer(json)
-
         self.image = Image({'Result':json.get('Image','')})
 
 
@@ -142,8 +116,6 @@ def get_zci(q, web_fallback=True, priority=['answer', 'abstract', 'related.0', '
     Use web_fallback=True to fall back to grabbing the first web result.
     passed to query. This method will fall back to 'Sorry, no results.' 
     if it cannot find anything.'''
-    
-
     ddg = query('\\'+q, **kwargs)
     response = ''
 
@@ -175,7 +147,6 @@ def get_zci(q, web_fallback=True, priority=['answer', 'abstract', 'related.0', '
     return response
 
 def main():
-
     if len(sys.argv) > 1:
         q = query(' '.join(sys.argv[1:]))
         keys = list(q.json.keys())

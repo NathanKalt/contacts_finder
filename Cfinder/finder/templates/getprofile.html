@@ -41,10 +41,10 @@
 	</br>
 
 	<div class="container">
-			{% if content.base_url %}
+			{% if content.url %}
 			<div>
 			<span>BASE URL -> </span>
-			 <br> <a target="_blank" rel="noopener noreferrer" href = {{ content.base_url }} >{{ content.base_url }}</a>
+			 <br> <a target="_blank" rel="noopener noreferrer" href = {{ content.url }} >{{ content.url }}</a>
 			</div>
 			{% endif %}
 			{% if content.emails %}
@@ -63,42 +63,42 @@
 				{% endfor %}
 			</div>
 			{% endif %}
-			{% if content.facebook %}
+			{% if content.socials.facebook %}
 			<div>
 				 <span>FACEBOOK -> </span> 
-				{% for link in content.facebook %}
+				{% for link in content.socials.facebook %}
 				<br> <a target="_blank" rel="noopener noreferrer" href = {{ link }} >{{ link }}</a>
 				{% endfor %}
 			</div>
 			{% endif %}
-			{% if content.linkedin %}
+			{% if content.socials.linkedin %}
 			<div>
 				 <span>LINKEDIN ->  </span> 
-				{% for link in content.linkedin %}
+				{% for link in content.socials.linkedin %}
 				<br> <a target="_blank" rel="noopener noreferrer" href = {{ link }} >{{ link }}</a>
 				{% endfor %}
 			</div>
 			{% endif %}
-			{% if content.vk %}
+			{% if content.socials.vk %}
 			<div>
 				<span>VKONTAKTE ->  </span> 
-				{% for link in content.vk %}
+				{% for link in content.socials.vk %}
 				<br> <a target="_blank" rel="noopener noreferrer" href = {{ link }} >{{ link }}</a>
 				{% endfor %}	
 			</div>
 			{% endif %}	
-			{% if content.vk %}
+			{% if content.socials.telegram %}
 			<div>
 				<span>TELEGRAM ->  </span> 
-				{% for link in content.telegram %}
+				{% for link in content.socials.telegram %}
 				<br> <a target="_blank" rel="noopener noreferrer" href = {{ link }} >{{ link }}</a>
 				{% endfor %}	
 			</div>	
 			{% endif %}		
-			{% if content.vk %}
+			{% if content.socials.instagram %}
 				<div>
 				<span>INSTAGRAM ->  </span> 
-				{% for link in content.instagram %}
+				{% for link in content.socials.instagram %}
 				<br> <a target="_blank" rel="noopener noreferrer" href = {{ link }} >{{ link }}</a>
 				{% endfor %}
 				</div>

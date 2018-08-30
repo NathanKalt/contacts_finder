@@ -6,8 +6,6 @@ from django.shortcuts import (render_to_response)
 from django.template import RequestContext
 
 # Create your views here.
-
-
 # HTTP Error 400
 def error_404(request):
         data = {}
@@ -28,12 +26,9 @@ def signupform(request):
 		query =  {'name':form.cleaned_data['name'], 'keyword':form.cleaned_data['keyword'], 'location':form.cleaned_data['location']}
 		find = FindPerson()
 		find.query = query
-		
 		return render(request, 'getprofile.html', {	'content': find.get_data(find.query), 'form':form})
-
 	else:
 	#creating a new form
 		form = SignupForm()
-
 	#returning form 
 		return render(request, 'getprofile.html', {'form':form})
